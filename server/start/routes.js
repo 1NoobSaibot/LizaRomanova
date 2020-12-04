@@ -21,3 +21,9 @@ Route.on('/').render('welcome')
 Route.group(() => {
   Route.get('product', 'ProductController.index')
 }).prefix('api')
+
+Route.group(() => {
+  Route.get('check', 'AdminController.check')
+  Route.post('login', 'AdminController.login').validator('AdminLogin')
+  Route.get('logout', 'AdminController.logout')
+}).prefix('api/admin').namespace('Admin')
