@@ -5,9 +5,9 @@
         <div class="text-h6">Вход в панель администратора</div>
       </q-card-section>
       <q-card-section>
-        <q-input label="E-mail" v-model="login"
-          :error="!!error.login"
-          :error-message="error.login"
+        <q-input label="E-mail" v-model="email"
+          :error="!!error.email"
+          :error-message="error.email"
         />
         <q-input label="Пароль" type="password" v-model="password"
           :error="!!error.password"
@@ -28,14 +28,14 @@ import ErrorHandler from '../../components/mixins/ErrorHandler.js'
 export default {
   mixins: [ErrorHandler],
   data: () => ({
-    login: '',
+    email: '',
     password: ''
   }),
   methods: {
     async submit () {
       try {
         await this.$store.dispatch('admin/login', {
-          login: this.login,
+          email: this.email,
           password: this.password
         })
         this.setError({})
