@@ -24,6 +24,8 @@ Route.group(() => {
 
 Route.group(() => {
   Route.get('check', 'AdminController.check')
-  Route.post('login', 'AdminController.login').validator('AdminLogin')
+  Route.post('login', 'AdminController.login').middleware('guest').validator('AdminLogin')
   Route.get('logout', 'AdminController.logout')
+
+  Route.delete('product/:product_id', 'ProductController.remove').middleware('auth')
 }).prefix('api/admin').namespace('Admin')
