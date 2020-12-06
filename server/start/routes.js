@@ -20,6 +20,7 @@ Route.on('/').render('welcome')
 
 Route.group(() => {
   Route.get('product', 'ProductController.index')
+  Route.get('product/:product_id', 'ProductController.show')
 }).prefix('api')
 
 Route.group(() => {
