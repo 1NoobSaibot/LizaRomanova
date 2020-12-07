@@ -9,7 +9,11 @@ class Product extends Model {
   }
 
   category () {
-    this.hasOne('App/Models/Category', 'category_id', 'id')
+    return this.hasOne('App/Models/Category', 'category_id', 'id')
+  }
+
+  purchasedItems () {
+    return this.hasMany('App/Models/PurchasedItem', 'id', 'product_id')
   }
 }
 

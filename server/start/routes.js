@@ -21,6 +21,7 @@ Route.on('/').render('welcome')
 Route.group(() => {
   Route.get('product', 'ProductController.index')
   Route.get('product/:product_id', 'ProductController.show')
+  Route.post('purchase', 'ProductController.buy').validator('Purchase')
 }).prefix('api')
 
 Route.group(() => {
