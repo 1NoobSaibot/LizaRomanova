@@ -18,8 +18,7 @@
         <div v-if="$store.getters['admin/isAuthorized']" class="row">
           <q-item>
             <q-item-section>
-              <q-item-label>{{ $store.getters['admin/name'] }}</q-item-label>
-              <q-item-label caption>
+              <q-item-label>
                 {{ $store.getters['admin/email'] }}
               </q-item-label>
             </q-item-section>
