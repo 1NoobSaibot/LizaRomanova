@@ -15,7 +15,11 @@
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn round icon="shopping_cart" class="q-ml-md">
+          <q-badge v-if="!cartIsEmpty" color="secondary" floating>
+            {{ cartCount }}
+          </q-badge>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -101,6 +105,14 @@ export default {
     return {
       leftDrawerOpen: false,
       essentialLinks: linksData
+    }
+  },
+  computed: {
+    cartCount () {
+      return this.$store.state.cart.count
+    },
+    cartIsEmpty () {
+      return !this.cartCount
     }
   }
 }
