@@ -46,6 +46,11 @@ export default {
       try {
         this.setError({})
         await this.$store.dispatch('cart/purchase', this.email)
+        this.$q.dialog({
+          message: 'Заказ успешно сформирован. Наш представитель скоро свяжется с Вами'
+        }).onDismiss(() => {
+          this.$router.push('/')
+        })
       } catch ({ response: { status, data } }) {
         if (status === 400) this.setError(data)
       }
