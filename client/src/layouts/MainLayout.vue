@@ -15,7 +15,7 @@
           Quasar App
         </q-toolbar-title>
 
-        <q-btn round icon="shopping_cart" class="q-ml-md">
+        <q-btn round icon="shopping_cart" class="q-ml-md" @click="$router.push('/cart')">
           <q-badge v-if="!cartIsEmpty" color="secondary" floating>
             {{ cartCount }}
           </q-badge>
@@ -109,7 +109,7 @@ export default {
   },
   computed: {
     cartCount () {
-      return this.$store.state.cart.count
+      return this.$store.getters['cart/count']
     },
     cartIsEmpty () {
       return !this.cartCount

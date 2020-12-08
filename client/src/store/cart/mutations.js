@@ -1,9 +1,8 @@
 import { Cookies } from 'quasar'
-
 const cookieName = 'cart'
 
 export function addProduct (state, product) {
-  const cart = Cookies.get(cookieName) || []
+  const cart = state.items
 
   let found = false
   for (let i = 0; i < cart.length; i++) {
@@ -20,29 +19,34 @@ export function addProduct (state, product) {
     })
   }
 
-  state.count = cart.length
-  state.totalPrice = calculateTotal(cart)
+  state.items = [...cart]
   Cookies.set(cookieName, cart, {
     path: '/'
   })
 }
 
 export function clear (state) {
-  state.count = 0
-  state.totalPrice = 0
+  state.items = []
   Cookies.remove(cookieName)
 }
 
 export function init (state) {
   const cart = Cookies.get(cookieName) || []
-  state.count = cart.length
-  state.totalPrice = calculateTotal(cart)
+  state.items = cart
 }
 
-function calculateTotal (cart) {
-  let total = 0
+export function setAmount (state, { id, amount }) {
+  console.log(`Cart/SetAmount: ID=${id}, Amount=${amount}`)
+  const cart = state.items
+
   for (let i = 0; i < cart.length; i++) {
-    total += cart[i].price * cart[i].amount
+    if (cart[i].id === id) {
+      cart[i].amount = amount
+      state.items = [...cart]
+      Cookies.set(cookieName, cart, {
+        path: '/'
+      })
+      return
+    }
   }
-  return total
 }
