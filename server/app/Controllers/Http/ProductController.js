@@ -1,9 +1,10 @@
 'use strict'
 
+const DB = use('Database')
+const Category = use('App/Models/Category')
 const Product = use('App/Models/Product')
 const Purchase = use('App/Models/Purchase')
 const PurchasedItem = use('App/Models/PurchasedItem')
-const DB = use('Database')
 
 class ProductController {
   async index ({ response }) {
@@ -65,6 +66,11 @@ class ProductController {
     })
 
     return response.ok()
+  }
+
+  async categories ({ response }) {
+    const array = await Category.all()
+    return response.json(array)
   }
 }
 
