@@ -15,7 +15,7 @@
           Quasar App
         </q-toolbar-title>
 
-        <q-btn round icon="shopping_cart" class="q-ml-md" @click="$router.push('/cart')">
+        <q-btn round icon="shopping_cart" class="q-ml-md" @click="cartClick">
           <q-badge v-if="!cartIsEmpty" color="secondary" floating>
             {{ cartCount }}
           </q-badge>
@@ -67,6 +67,15 @@ export default {
     },
     cartIsEmpty () {
       return !this.cartCount
+    }
+  },
+  methods: {
+    cartClick () {
+      if (this.cartIsEmpty) {
+        this.$q.dialog({ message: 'Корзина пустая' })
+      } else {
+        this.$router.push('/cart')
+      }
     }
   },
   async mounted () {

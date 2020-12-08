@@ -2,7 +2,7 @@
   <q-page class="flex" style="justify-content: flex-start">
     <q-card v-for="product in products" :key="product.id"
       class="product"
-      @click="$router.push(`product/${product.id}`)"
+      @click="$router.push(`/product/${product.id}`)"
     >
       <q-card-section>
         <img
