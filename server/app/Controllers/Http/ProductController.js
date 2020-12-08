@@ -11,6 +11,14 @@ class ProductController {
     return response.json(products)
   }
 
+  async indexCategory ({ params: { category_id }, response }) {
+    const products = await Product.query()
+      .where('category_id', category_id)
+      .fetch()
+
+    return response.json(products)
+  }
+
   async show ({ params: { product_id }, response }) {
     const product = await Product.find(product_id)
     if (product) return response.json(product)
