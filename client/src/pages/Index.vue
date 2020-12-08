@@ -26,8 +26,13 @@ export default {
   data: () => ({
     products: []
   }),
+  computed: {
+    categoryId () {
+      return this.$route.params.categoryId
+    }
+  },
   async mounted () {
-    const { data } = await this.$axios.get('api/product')
+    const { data } = await this.$axios.get(this.categoryId ? `api/category/${this.categoryId}/product` : 'api/product')
     this.products = data
   }
 }

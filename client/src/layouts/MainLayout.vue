@@ -34,13 +34,15 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          Категории
         </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item clickable v-ripple style="border: 1px #0005 solid"
+          v-for="item in categories"
+          :key="item.id"
+          @click="$router.push(`/category/${item.id}`)"
+        >
+          <q-item-section>{{ '> ' + item.name }}</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -51,60 +53,12 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
-
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
   data () {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
+      categories: []
     }
   },
   computed: {
@@ -114,6 +68,10 @@ export default {
     cartIsEmpty () {
       return !this.cartCount
     }
+  },
+  async mounted () {
+    const { data } = await this.$axios.get('api/category')
+    this.categories = data
   }
 }
 </script>
