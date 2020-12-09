@@ -1,21 +1,22 @@
 <template>
   <q-page class="q-pa-md">
-    <div class="column" style="min-width: 50%; max-width: 100%; display: table-caption;">
-      <div class="text-h3 q-mb-md">{{ product.name }}</div>
-      <div class="row">
+    <div class="text-h3 q-mb-md">{{ product.name }}</div>
+    <div class="row" style="flex-wrap: nowrap">
+      <div>
         <img class="photo"
           alt="Quasar logo"
           :src="`file/product/${product.id}/avatar`"
         >
-        <div class="text-h6" style="width: 100%">
-          <div class="q-my-md">
-            {{ product.description }}
-          </div>
-          <div class="row">
-            <q-space/>
-            {{ product.price + ' грн.' }}
-            <q-btn label="Купить" color="primary" @click="addToCart" class="q-ml-md"/>
-          </div>
+      </div>
+      <div class="column text-h6 q-ml-md">
+        <div class="q-my-md">
+          {{ product.description }}
+        </div>
+        <q-space/>
+        <div class="row q-ma-md">
+          <q-space/>
+          {{ product.price + ' грн.' }}
+          <q-btn label="Купить" color="primary" @click="addToCart" class="q-ml-md"/>
         </div>
       </div>
     </div>
@@ -52,8 +53,6 @@ export default {
 
 <style scoped>
 .photo {
-  height: 480px;
-  width: 640px;
-  border: 1px rgba(0, 0, 0, 0.5) solid;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
 }
 </style>
