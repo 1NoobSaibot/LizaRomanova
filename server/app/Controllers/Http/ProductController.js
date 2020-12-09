@@ -2,6 +2,8 @@
 
 const DB = use('Database')
 const Category = use('App/Models/Category')
+const fs = use('fs')
+const Helpers = use('Helpers')
 const Product = use('App/Models/Product')
 const Purchase = use('App/Models/Purchase')
 const PurchasedItem = use('App/Models/PurchasedItem')
@@ -71,6 +73,19 @@ class ProductController {
   async categories ({ response }) {
     const array = await Category.all()
     return response.json(array)
+  }
+
+  async getFirstImage ({ params: { product_id }, response }) {
+    const product = await Product.find(product_id)
+    if (!product) return response.notFound(`Товар ID=${product_id} не найден`)
+
+    try {
+      const url = Helpers.appRoot(`uploads/images/${product.category_id}/${product_id}`)
+      const files = fs.readdirSync(url)
+      response.download(Helpers.appRoot(`uploads/images/${product.category_id}/${product_id}/${files[0]}`))
+    } catch {
+      return response.notFound()
+    }
   }
 }
 

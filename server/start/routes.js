@@ -33,3 +33,5 @@ Route.group(() => {
 
   Route.delete('product/:product_id', 'ProductController.remove').middleware('auth')
 }).prefix('api/admin').namespace('Admin')
+
+Route.get('file/product/:product_id/avatar', 'ProductController.getFirstImage')
