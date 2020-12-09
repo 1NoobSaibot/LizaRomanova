@@ -37,9 +37,9 @@
           Категории
         </q-item-label>
         <q-item clickable v-ripple style="border: 1px #0005 solid"
-          v-for="item in categories"
+          v-for="item in modifiedCategories"
           :key="item.id"
-          @click="$router.push(`/category/${item.id}`)"
+          @click="$router.push(item.id ? `/category/${item.id}` : '/')"
         >
           <q-item-section>{{ '> ' + item.name }}</q-item-section>
         </q-item>
@@ -67,6 +67,9 @@ export default {
     },
     cartIsEmpty () {
       return !this.cartCount
+    },
+    modifiedCategories () {
+      return [{ name: 'Все категории' }, ...this.categories]
     }
   },
   methods: {

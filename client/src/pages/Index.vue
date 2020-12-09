@@ -30,9 +30,19 @@ export default {
       return this.$route.params.categoryId
     }
   },
+  methods: {
+    async fetch () {
+      const { data } = await this.$axios.get(this.categoryId ? `api/category/${this.categoryId}/product` : 'api/product')
+      this.products = data
+    }
+  },
+  watch: {
+    categoryId () {
+      this.fetch()
+    }
+  },
   async mounted () {
-    const { data } = await this.$axios.get(this.categoryId ? `api/category/${this.categoryId}/product` : 'api/product')
-    this.products = data
+    await this.fetch()
   }
 }
 </script>
