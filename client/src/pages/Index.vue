@@ -4,17 +4,16 @@
       class="product"
       @click="$router.push(`/product/${product.id}`)"
     >
-      <q-card-section>
-        <img
+      <q-card-section class="flex flex-center"
+        style="width: 287px; height: 275.75px"
+      >
+        <img style="max-width: 254.75px; max-height: 237.75px"
           alt="Quasar logo"
-          src="~assets/quasar-logo-full.svg"
+          :src="`file/product/${product.id}/avatar`"
         >
       </q-card-section>
       <q-card-section>
         <div class="text-h6">{{ product.name }}</div>
-      </q-card-section>
-      <q-card-section class="q-pt-none">
-        {{ product.description }}
       </q-card-section>
     </q-card>
   </q-page>

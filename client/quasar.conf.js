@@ -83,6 +83,10 @@ module.exports = function (/* ctx */) {
         '/api': {
           target: 'http://127.0.0.1:3333',
           changeOrigin: true
+        },
+        '/file': {
+          target: 'http://127.0.0.1:3333',
+          changeOrigin: true
         }
       }
     },
