@@ -12,11 +12,7 @@ export function addProduct (state, product) {
     }
   }
   if (!found) {
-    cart.push({
-      id: product.id,
-      amount: product.amount,
-      price: product.price
-    })
+    cart.push(product)
   }
 
   state.items = [...cart]
@@ -36,7 +32,6 @@ export function init (state) {
 }
 
 export function setAmount (state, { id, amount }) {
-  console.log(`Cart/SetAmount: ID=${id}, Amount=${amount}`)
   const cart = state.items
 
   for (let i = 0; i < cart.length; i++) {
@@ -49,4 +44,18 @@ export function setAmount (state, { id, amount }) {
       return
     }
   }
+}
+
+export function removeProduct (state, productId) {
+  const cart = state.items
+  const newCart = []
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id !== productId) newCart.push(cart[i])
+  }
+
+  state.items = newCart
+  Cookies.set(cookieName, newCart, {
+    path: '/'
+  })
 }

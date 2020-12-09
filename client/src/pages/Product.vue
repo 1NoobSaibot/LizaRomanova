@@ -27,8 +27,7 @@
 export default {
   name: 'PageIndex',
   data: () => ({
-    product: {},
-    amount: 1
+    product: {}
   }),
   computed: {
     id () {
@@ -38,9 +37,8 @@ export default {
   methods: {
     addToCart () {
       this.$store.commit('cart/addProduct', {
-        id: this.id,
-        amount: this.amount,
-        price: this.product.price
+        ...this.product,
+        amount: 1
       })
     }
   },
