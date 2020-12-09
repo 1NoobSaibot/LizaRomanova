@@ -5,7 +5,7 @@
       <div class="row">
         <img class="photo"
           alt="Quasar logo"
-          src="~assets/quasar-logo-full.svg"
+          :src="`file/product/${product.id}/avatar`"
         >
         <div class="text-h6" style="width: 100%">
           <div class="q-my-md">
