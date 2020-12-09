@@ -12,7 +12,7 @@ class ProductSchema extends Schema {
         .onDelete('restrict').onUpdate('cascade')
       table.string('name', 254).notNullable()
       table.decimal('price', 10, 2).notNullable()
-      table.string('description', 254).default(null)
+      table.text('description').default(null)
       table.text('props_json').default(null)
       table.timestamps()
     })
