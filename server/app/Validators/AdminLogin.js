@@ -1,6 +1,6 @@
 'use strict'
 
-class UserLogin {
+class AdminLogin {
   get validateAll() {
     return true
   }
@@ -32,4 +32,4 @@ class UserLogin {
   }
 }
 
-module.exports = UserLogin
+module.exports = AdminLogin
