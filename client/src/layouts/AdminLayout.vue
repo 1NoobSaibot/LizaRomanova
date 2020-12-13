@@ -36,15 +36,18 @@
       <q-list>
         <q-item-label
           header
-          class="text-grey-8"
+          class="text-h6"
         >
-          Essential Links
+          Меню
         </q-item-label>
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+        <q-item v-for="link in links" :key="link.label"
+          clickable v-ripple style="border: 1px #0005 solid"
+          @click="$router.push(link.pushTo)"
+        >
+          <q-item-section>
+            {{ '> ' + link.label }}
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -55,24 +58,18 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-
-const linksData = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  }
+const links = [
+  { label: 'Категории', pushTo: '/admin/category' },
+  { label: 'Товары', pushTo: '/admin/product' },
+  { label: 'Продажи', pushTo: '/admin/purchase' }
 ]
 
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
   data () {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
+      links: links
     }
   },
   methods: {
