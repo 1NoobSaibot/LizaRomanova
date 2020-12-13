@@ -18,7 +18,8 @@ const routes = [
       { path: 'login', component: () => import('pages/admin/Login.vue') },
       { path: 'product', component: () => import('pages/admin/Products.vue') },
       // { path: 'product/:id', component: () => import('pages/admin/Product.vue') },
-      { path: 'new/product', component: () => import('pages/admin/Product.vue') }
+      { path: 'new/product', component: () => import('pages/admin/Product.vue') },
+      { path: 'category', component: () => import('pages/admin/Categories.vue') }
     ]
   },
 
