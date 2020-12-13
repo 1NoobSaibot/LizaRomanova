@@ -30,14 +30,18 @@ Route.group(() => {
   Route.get('check', 'AdminController.check')
   Route.post('login', 'AdminController.login').middleware('guest').validator('AdminLogin')
   Route.get('logout', 'AdminController.logout')
-
-  Route.post('product', 'ProductController.store').middleware('auth').validator('Product')
-  Route.put('product/:product_id', 'ProductController.update').middleware('auth').validator('Product')
-  Route.delete('product/:product_id', 'ProductController.remove').middleware('auth')
-
-  Route.post('category', 'CategoryController.store').middleware('auth').validator('Category')
-  Route.put('category/:category_id', 'CategoryController.update').middleware('auth').validator('Category')
-  Route.delete('category/:category_id', 'CategoryController.destroy').middleware('auth')
 }).prefix('api/admin').namespace('Admin')
+
+Route.group(() => {
+  Route.post('product', 'ProductController.store').validator('Product')
+  Route.put('product/:product_id', 'ProductController.update').validator('Product')
+  Route.delete('product/:product_id', 'ProductController.remove')
+
+  Route.post('category', 'CategoryController.store').validator('Category')
+  Route.put('category/:category_id', 'CategoryController.update').validator('Category')
+  Route.delete('category/:category_id', 'CategoryController.destroy')
+
+  Route.get('purchase', 'PurchaseController.index')
+}).prefix('api/admin').namespace('Admin').middleware('auth')
 
 Route.get('file/product/:product_id/avatar', 'ProductController.getFirstImage')
