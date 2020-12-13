@@ -33,6 +33,10 @@ Route.group(() => {
 
   Route.post('product', 'ProductController.store').middleware('auth').validator('Product')
   Route.delete('product/:product_id', 'ProductController.remove').middleware('auth')
+
+  Route.post('category', 'CategoryController.store').middleware('auth').validator('Category')
+  Route.put('category/:category_id', 'CategoryController.update').middleware('auth').validator('Category')
+  Route.delete('category/:category_id', 'CategoryController.destroy').middleware('auth')
 }).prefix('api/admin').namespace('Admin')
 
 Route.get('file/product/:product_id/avatar', 'ProductController.getFirstImage')
