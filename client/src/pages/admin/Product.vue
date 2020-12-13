@@ -64,9 +64,9 @@ export default {
         this.description = data.description
         this.price = data.price
         this.category = this.categories.find((v) => v === data.category_id)
-        const { data: image } = await this.$axios.get(`file/product/${this.id}/avatar`)
-        this.image = image
-        this.$refs.uploader.addFiles([image])
+        // const response = await this.$axios.get(`file/product/${this.id}/avatar`)
+        // this.image = new File(image, )
+        // this.$refs.uploader.addFiles(image)
       }
     },
     onImageAdded (image) {
@@ -87,7 +87,15 @@ export default {
 
       try {
         this.setError({})
-        await this.$axios.post('api/admin/product', formData)
+        if (this.isCreateMode) {
+          await this.$axios.post('api/admin/product', formData)
+        } else {
+          await this.$axios.put(`api/admin/product/${this.id}`, formData)
+        }
+        this.$q.dialog({ message: this.isCreateMode ? 'Товар успешно создан' : 'Товар успешно изменён' })
+          .onDismiss(() => {
+            this.$router.back()
+          })
       } catch ({ response: { status, data } }) {
         if (status === 400) this.setError(data)
       }

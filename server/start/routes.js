@@ -32,6 +32,7 @@ Route.group(() => {
   Route.get('logout', 'AdminController.logout')
 
   Route.post('product', 'ProductController.store').middleware('auth').validator('Product')
+  Route.put('product/:product_id', 'ProductController.update').middleware('auth').validator('Product')
   Route.delete('product/:product_id', 'ProductController.remove').middleware('auth')
 
   Route.post('category', 'CategoryController.store').middleware('auth').validator('Category')

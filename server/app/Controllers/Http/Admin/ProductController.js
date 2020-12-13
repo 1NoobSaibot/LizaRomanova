@@ -33,34 +33,29 @@ class ProductController {
   }
 
   async update ({ params: { product_id }, request, response }) {
-    // const product = await Product.find(product_id)
-    // if (!product) return response.notFound()
-    // const { categoryId, name, price, description, propsJson } = request.post()
-    // const avatar = request.file('avatar', { types: ['image'] })
+    const product = await Product.find(product_id)
+    if (!product) return response.notFound()
+    const { categoryId, name, price, description, propsJson } = request.post()
+    const avatar = request.file('avatar', { types: ['image'] })
 
-    // await DB.transaction(async trx => {
-    //   const product = await Product.create({
-    //     category_id: categoryId,
-    //     name,
-    //     price,
-    //     description,
-    //     props_json: propsJson
-    //   }, trx)
+    await DB.transaction(async trx => {
+      product.category_id = categoryId
+      product.name = name
+      product.price = price
+      product.description = description
+      product.props_json = propsJson
+      await product.save(trx)
 
-      
-    //   const path = Helpers.appRoot(Helpers.appRoot(`uploads/images/${category.id}/${product.id}`))
-    //   await avatar.move(path, (file) => {
-    //     return {
-    //       name: `1.${file.subtype}`,
-    //       overwrite: true
-    //     }
-    //   })
-    //   if (!avatar.moved()) {
-    //     throw avatar.error()
-    //   }
-    // })
+      if (avatar) {
+        const path = Helpers.appRoot(`uploads/images/${categoryId}/${product.id}`)
+        await avatar.move(path, { name: `1.${avatar.extname}`, overwrite: true })
+        if (!avatar.moved()) {
+          throw avatar.error()
+        }
+      }
+    })
     
-    // return response.ok()
+    return response.ok()
   }
 
   async remove ({ params: { product_id }, response }) {
