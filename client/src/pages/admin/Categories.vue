@@ -1,11 +1,11 @@
 <template>
   <q-page class="q-pa-md">
     <div class="row q-mb-md">
+      <div class="text-h6">Категории</div>
       <q-space/>
       <q-btn title="Добавить категорию" dense icon="add" color="primary" @click="add"/>
     </div>
     <q-table
-      title="Категории"
       :data="categories"
       :columns="columns"
       row-key="name"
