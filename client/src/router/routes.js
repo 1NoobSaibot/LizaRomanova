@@ -24,6 +24,14 @@ const routes = [
     ]
   },
 
+  {
+    path: '/extension',
+    component: () => import('layouts/ExtensionLayout.vue'),
+    children: [
+      { path: 'popup', component: () => import('pages/admin/PopupPage.vue') }
+    ]
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {
