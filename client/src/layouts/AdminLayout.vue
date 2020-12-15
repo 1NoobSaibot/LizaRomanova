@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Admin App
+          QShop Admin Panel
         </q-toolbar-title>
 
         <div v-if="$store.getters['admin/isAuthorized']" class="row">

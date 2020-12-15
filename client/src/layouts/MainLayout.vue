@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          QShop
         </q-toolbar-title>
 
         <q-btn round icon="shopping_cart" class="q-ml-md" @click="cartClick">
