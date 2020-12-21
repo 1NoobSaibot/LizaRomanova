@@ -23,12 +23,11 @@ class UserController {
         email: admin.email,
         id: admin.id
       })
-    } catch (e) {
-      throw e
-      /*return response.badRequest({
-        login: 'Проверьте правильность введённого логина',
+    } catch {
+      return response.badRequest({
+        email: 'Проверьте правильность введённого логина',
         password: 'или пароля'
-      })*/
+      })
     }
   }
 
