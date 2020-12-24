@@ -42,6 +42,8 @@ Route.group(() => {
   Route.delete('category/:category_id', 'CategoryController.destroy')
 
   Route.get('purchase', 'PurchaseController.index')
+  Route.get('purchase/new/count', 'PurchaseController.newPurchasesCount')
+  Route.put('purchase/:id/set/status/:status', 'PurchaseController.setStatus')
 }).prefix('api/admin').namespace('Admin').middleware('auth')
 
 Route.get('file/product/:product_id/avatar', 'ProductController.getFirstImage')
