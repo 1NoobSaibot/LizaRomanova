@@ -8,6 +8,7 @@ class PurchaseSchema extends Schema {
     this.create('purchase', (table) => {
       table.increments()
       table.string('client_email', 254).notNullable()
+      table.enum('status', ['new', 'confirmed', 'canceled']).notNullable().defaultTo('new')
       table.timestamps()
     })
   }
